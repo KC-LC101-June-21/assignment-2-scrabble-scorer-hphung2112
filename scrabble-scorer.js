@@ -79,21 +79,21 @@ function vowelBonusScoreSystem() {
 // https://www.w3schools.com/js/js_objects.asp
 // key: value<---function
 let simpleScore = {
-  'Name':'Simple Score',
-  'Description':'Each letter is worth 1 point',
-  'ScoreFunction':simpleScoreSystem,
+  'name':'Simple Score',
+  'description':'Each letter is worth 1 point',
+  'scoreFunction':simpleScoreSystem,
 };
 
 let vowelBonusScore = {
-  'Name':'Bonus Vowels',
-  'Description':'Vowels are 3 pts, consonants are 1 pt.',
-  'ScoreFunction':vowelBonusScoreSystem,
+  'name':'Bonus Vowels',
+  'description':'Vowels are 3 pts, consonants are 1 pt.',
+  'scoreFunction':vowelBonusScoreSystem,
 };
 
 let scrabbleScore = {
-  'Name':'Scrabble',
-  'Description':'The traditional scoring algorithm',
-  'ScoreFunction':oldScrabbleScorer,
+  'name':'Scrabble',
+  'description':'The traditional scoring algorithm',
+  'scoreFunction':oldScrabbleScorer,
 };
 
 const scoringAlgorithms = [simpleScore, vowelBonusScore, scrabbleScore];
@@ -101,7 +101,7 @@ const scoringAlgorithms = [simpleScore, vowelBonusScore, scrabbleScore];
 function scorerPromptOne() {
   console.log(`Which scording algorithm would you like to use? \n \n`);
   for (let i = 0; i < scoringAlgorithms.length; i++) {
-    console.log(`${[i]} - ${scoringAlgorithms[i].Name} : ${scoringAlgorithms[i].Description}\n`);
+    console.log(`${[i]} - ${scoringAlgorithms[i].name} : ${scoringAlgorithms[i].description}\n`);
   }
 }
 
@@ -109,37 +109,43 @@ function scorerPrompt() {
   let userScoringOptionsInput = "";
   while (userScoringOptionsInput < scoringAlgorithms.length && userScoringOptionsInput >=0 && !NaN.userScoringOptionsInput){
   userScoringOptionsInput = Number(input.question(`Enter 0, 1, 2: `));
-  console.log(`Score for '${word}': ${scoringAlgorithms[userScoringOptionsInput].ScoreFunction()}`);
+  console.log(`Score for '${word}': ${scoringAlgorithms[userScoringOptionsInput].scoreFunction()}`);
   break;
 }
 return userScoringOptionsInput;
 }
 
 function transform(oldPointStructure) {
+
+let newPointStructure = {};
+
   for(const pointValue in oldPointStructure) {
-    for (i = 0; i < oldPointStructure['1'].length; i++) {
-      oldPointStructure[oldPointStructure['1'][i]] = 1;
-    }
-    for (i = 0; i < oldPointStructure['2'].length; i++) {
-      oldPointStructure[oldPointStructure['2'][i]] = 2;
-    }
-    for (i = 0; i < oldPointStructure['3'].length; i++) {
-      oldPointStructure[oldPointStructure['3'][i]] = 3;
-    }
-    for (i = 0; i < oldPointStructure['4'].length; i++) {
-      oldPointStructure[oldPointStructure['4'][i]] = 4;
-    }
-    for (i = 0; i < oldPointStructure['5'].length; i++) {
-      oldPointStructure[oldPointStructure['5'][i]] = 5;
-    }
-    for (i = 0; i < oldPointStructure['8'].length; i++) {
-      oldPointStructure[oldPointStructure['8'][i]] = 8;
-    }
-    for (i = 0; i < oldPointStructure['10'].length; i++) {
-      oldPointStructure[oldPointStructure['10'][i]] = 10;
-    }
+    let letters = oldPointStructure[pointValue]
+    newPointStructure[pointValue] = letters;
+
+    // for (i = 0; i < oldPointStructure['1'].length; i++) {
+    //   oldPointStructure[oldPointStructure['1'][i]] = 1;
+    // }
+    // for (i = 0; i < oldPointStructure['2'].length; i++) {
+    //   oldPointStructure[oldPointStructure['2'][i]] = 2;
+    // }
+    // for (i = 0; i < oldPointStructure['3'].length; i++) {
+    //   oldPointStructure[oldPointStructure['3'][i]] = 3;
+    // }
+    // for (i = 0; i < oldPointStructure['4'].length; i++) {
+    //   oldPointStructure[oldPointStructure['4'][i]] = 4;
+    // }
+    // for (i = 0; i < oldPointStructure['5'].length; i++) {
+    //   oldPointStructure[oldPointStructure['5'][i]] = 5;
+    // }
+    // for (i = 0; i < oldPointStructure['8'].length; i++) {
+    //   oldPointStructure[oldPointStructure['8'][i]] = 8;
+    // }
+    // for (i = 0; i < oldPointStructure['10'].length; i++) {
+    //   oldPointStructure[oldPointStructure['10'][i]] = 10;
+    // }
   }
-  return oldPointStructure;
+  return newPointStructure;
 }
 
 let newPointStructure = transform(oldPointStructure);
